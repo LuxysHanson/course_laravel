@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\IndexController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\News\CategoriesController;
+use App\Http\Controllers\News\NewsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,11 +17,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-$routes = include __DIR__ ."/routes.php";
+// Главная страница
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-foreach ($routes as $link => $view) {
-    Route::get($link, function () use ($view) {
-        return view($view);
+// Страница - О нас
+Route::view('/about', 'about')->name('about');
+
+// Страница - новостей и категории новостей
+Route::name('news.')
+    ->prefix('news')
+    ->group(function () {
+        Route::get('/', [NewsController::class, 'index'])->name('index');
+        Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
+        Route::get('/{id}', [NewsController::class, 'view'])->name('view');
+        Route::get('/categories/{id}', [CategoriesController::class, 'view'])->name('category');
     });
-}
+
+// Админка
+Route::name('admin.')
+    ->prefix('admin')
+    ->group(function () {
+        Route::get('/', [IndexController::class, 'index'])->name('index');
+        Route::get('/test1', [IndexController::class, 'test1'])->name('test1');
+        Route::get('/test2', [IndexController::class, 'test2'])->name('test2');
+    });
+
 
