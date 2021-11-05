@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\News\CategoriesController;
-use App\Http\Controllers\News\NewsController;
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 
 /*
