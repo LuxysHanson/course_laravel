@@ -7,11 +7,13 @@ use App\Models\Categories;
 class CategoriesController extends Controller
 {
 
+    protected $prefix_view = 'pages/categories';
+
     public function index()
     {
         $categories = Categories::getCategories();
 
-        return view('news.categories.index', [
+        return $this->render('index', [
             'categories' => $categories
         ]);
     }
@@ -20,7 +22,7 @@ class CategoriesController extends Controller
     {
         $newsByCategory = Categories::getNewsByCategory($id);
 
-        return view('news.categories.view', [
+        return $this->render('view', [
             'news' => $newsByCategory
         ]);
     }

@@ -4,7 +4,7 @@
 
 use Illuminate\Support\Str;
 
-include __DIR__ ."/../menu.php"
+include __DIR__ . "/../menu.php"
 
 ?>
 
