@@ -2,8 +2,6 @@
 
 /** @var $news array */
 
-use Illuminate\Support\Str;
-
 include "menu.php"
 
 ?>
