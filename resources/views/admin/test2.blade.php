@@ -1,9 +1,9 @@
 @extends('layouts/admin')
 
 @section('title')
-    @parent Dashboard
+    @parent Тест2
 @endsection
 
 @section('content')
-    <h2>Админка</h2>
+    <h2>Тест 2</h2>
 @endsection

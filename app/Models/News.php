@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
-
 class News
 {
 
-    private static $news = [
+    private $news = [
         1 => [
             'id' => 1,
             'title' => 'Новость 1',
@@ -24,15 +22,14 @@ class News
         ]
     ];
 
-    public static function getNews()
+    public function getNews()
     {
-//        dump(Str::slug('Новость 1'));
-        return static::$news;
+        return $this->news;
     }
 
-    public static function getNewsId($id)
+    public function getNewsById($id)
     {
-        return self::$news[$id] ?? [];
+        return $this->getNews()[$id] ?? [];
     }
 
 }

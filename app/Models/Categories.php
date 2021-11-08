@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
-
 class Categories
 {
 
-    private static $categories = [
+    private $_news;
+
+    private $categories = [
         1 => [
             'id' => 1,
             'title' => 'Спорт',
@@ -22,19 +22,24 @@ class Categories
         ]
     ];
 
-    public static function getCategories()
+    public function __construct(News $news)
     {
-        return static::$categories;
+        $this->_news = $news;
     }
 
-    public static function getCategoryId($id)
+    public function getCategories()
     {
-        return self::$categories[$id] ?? [];
+        return $this->categories;
     }
 
-    public static function getNewsByCategory($id)
+    public function getCategoryById($id)
     {
-        $news = array_filter(News::getNews(), function ($item) use ($id) {
+        return $this->getCategories()[$id] ?? [];
+    }
+
+    public function getNewsByCategoryId($id)
+    {
+        $news = array_filter($this->_news->getNews(), function ($item) use ($id) {
             return $item['category_id'] == $id;
         });
         return $news ?: [];

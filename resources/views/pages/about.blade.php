@@ -1,5 +1,11 @@
 @extends('layouts/app')
 
+@section('title')
+    @parent О нас
+@endsection
+
 @section('content')
-    <h2>О сайте</h2>
+    <div class="site-section">
+        <h2>О сайте</h2>
+    </div>
 @endsection

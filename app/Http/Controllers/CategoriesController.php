@@ -9,21 +9,20 @@ class CategoriesController extends Controller
 
     protected $prefix_view = 'pages/categories';
 
-    public function index()
+    public function index(Categories $categories)
     {
-        $categories = Categories::getCategories();
 
         return $this->render('index', [
-            'categories' => $categories
+            'categories' => $categories->getCategories()
         ]);
     }
 
-    public function view($id)
+    public function view(Categories $categories, int $id)
     {
-        $newsByCategory = Categories::getNewsByCategory($id);
 
         return $this->render('view', [
-            'news' => $newsByCategory
+            'category' => $categories->getCategoryById($id),
+            'news' => $categories->getNewsByCategoryId($id)
         ]);
     }
 

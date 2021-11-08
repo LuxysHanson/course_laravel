@@ -9,18 +9,16 @@ class NewsController extends Controller
 
     protected $prefix_view = 'pages.news';
 
-    public function index()
+    public function index(News $news)
     {
-        $news = News::getNews();
 
-        return $this->render('index')->with('news', $news);
+        return $this->render('index')->with('news', $news->getNews());
     }
 
-    public function view($id)
+    public function view(News $news, int $id)
     {
-        $news = News::getNewsId($id);
 
-        return $this->render('view')->with('news', $news);
+        return $this->render('view')->with('news', $news->getNewsById($id));
     }
 
 }
