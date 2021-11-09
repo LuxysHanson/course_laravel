@@ -20,6 +20,9 @@ a {
 	&:hover {
 		text-decoration: none;
 	}
+    &:hover, &:focus {
+        color: #8bc34a
+    }
 }
 
 h1, h2, h3, h4, h5,
@@ -52,6 +55,8 @@ h1, h2, h3, h4, h5,
 }
 
 .site-wrap {
+    min-height: calc(100vh - 103px);
+
 	&:before {
 		display: none;
 		transition: .3s all ease-in-out;
@@ -267,5 +272,13 @@ h1, h2, h3, h4, h5,
 		appearance: none;
 		width: 100%;
 	}
+}
+
+i.fas, i.fab {
+    font-style: normal;
+}
+
+.fas, .fab {
+    font-family:  "FontAwesome";
 }
 

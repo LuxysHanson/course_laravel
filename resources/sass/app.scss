@@ -1,7 +1,8 @@
 // Bootstrap
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
+@import '~bootstrap/scss/bootstrap';
+
+// Font awesome
+@import '~font-awesome/css/font-awesome.min.css';
 
 /* Base */
 @import "front/site-base";

@@ -11,10 +11,19 @@
 
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-@include('pages/blocks/menu')
-<div class="container">
+
+<div class="site-wrap">
+
+    {{-- Меню сайта --}}
+    @include('pages/blocks/menu')
+
+    {{-- Контентная часть --}}
     @yield('content')
+
 </div>
+
+{{-- Футер сайта --}}
+@include('pages/blocks/footer')
 
 <!-- loader -->
 <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#ff5e15"/></svg></div>

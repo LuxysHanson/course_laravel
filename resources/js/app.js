@@ -3,7 +3,8 @@
 
 import * as AOS from 'aos';
 import * as $ from 'jquery';
-import * as sticky from 'jquery-sticky';
+
+require('jquery-sticky');
 
 AOS.init({
     duration: 800,
@@ -122,7 +123,7 @@ $(document).ready(function($) {
             $(this).closest('.input-group').find('.form-control').val(parseInt($(this).closest('.input-group').find('.form-control').val()) + 1);
         });
     };
-    // sitePlusMinus();
+    sitePlusMinus();
 
 
     var siteSliderRange = function() {
@@ -273,20 +274,6 @@ $(document).ready(function($) {
     };
     // siteStellar();
 
-    var siteCountDown = function() {
-
-        $('#date-countdown').countdown('2020/10/10', function(event) {
-            var $this = $(this).html(event.strftime(''
-                + '<span class="countdown-block"><span class="label">%w</span> weeks </span>'
-                + '<span class="countdown-block"><span class="label">%d</span> days </span>'
-                + '<span class="countdown-block"><span class="label">%H</span> hr </span>'
-                + '<span class="countdown-block"><span class="label">%M</span> min </span>'
-                + '<span class="countdown-block"><span class="label">%S</span> sec</span>'));
-        });
-
-    };
-    // siteCountDown();
-
     var siteDatePicker = function() {
 
         if ( $('.datepicker').length > 0 ) {
@@ -303,7 +290,7 @@ $(document).ready(function($) {
 
     // navigation
     var OnePageNavigation = function() {
-        var navToggler = $('.site-menu-toggle');
+        // var navToggler = $('.site-menu-toggle');
         $("body").on("click", ".main-menu li a[href^='#'], .smoothscroll[href^='#'], .site-mobile-menu .site-nav-wrap li a", function(e) {
             e.preventDefault();
 
@@ -317,7 +304,7 @@ $(document).ready(function($) {
 
         });
     };
-//   OnePageNavigation();
+   OnePageNavigation();
 
     var siteScroll = function() {
 

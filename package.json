@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "aos": "^2.3.4",
+        "font-awesome": "^4.7.0",
         "jquery-sticky": "^1.0.4"
     }
 }
