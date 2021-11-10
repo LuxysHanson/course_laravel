@@ -6,13 +6,20 @@
 
 @section('content')
     <div class="site-section">
-        <h2>Вывод новостей по данной категории</h2>
-        @forelse($news as $item)
-            <a href="{{ route('news.view', [ 'id' => $item['id'] ]) }}">
-                {{ $item['title'] ?? '' }}
-            </a><br>
-        @empty
-            <p>По данной категории отсутвуют новости</p>
-        @endforelse
+        <div class="container">
+            <div class="section-title">
+                <span class="caption d-block small">Категория</span>
+                <h2>{{ $category['title'] ?? '' }}</h2>
+            </div>
+
+            @if(!empty($news))
+                @include('pages/news/template/_list', $news)
+            @else
+                <div class="alert alert-warning" role="alert">
+                    Нет добавленных новостей
+                </div>
+            @endif
+
+        </div>
     </div>
 @endsection

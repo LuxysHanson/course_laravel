@@ -6,6 +6,10 @@
 
 @section('content')
     <div class="site-section">
-        <h2>О сайте</h2>
+        <div class="container">
+            <div class="section-title">
+                <h2>Заголовок страницы "О нас"</h2>
+            </div>
+        </div>
     </div>
 @endsection

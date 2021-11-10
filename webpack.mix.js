@@ -11,15 +11,24 @@ const mix = require('laravel-mix');
  |
  */
 
+let assets_path = 'resources/assets';
+
 
 // Сайт
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
+mix.js(assets_path + '/scripts/app.js', 'public/js')
+    .sass(assets_path + '/styles/app.scss', 'public/css')
     .sourceMaps();
-
 
 
 // Админка
-mix.js('resources/js/admin.js', 'public/js')
-    .sass('resources/sass/admin.scss', 'public/css')
+mix.js(assets_path + '/scripts/admin.js', 'public/js')
+    .sass(assets_path + '/styles/admin.scss', 'public/css')
     .sourceMaps();
+
+
+mix.copyDirectory('storage/app/site_images', 'public/images')
+
+
+if (mix.inProduction()) {
+    mix.version();
+}

@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\News;
 
 class HomeController extends Controller
 {
 
-    public function index()
+    public function index(News $news)
     {
-        return view('index');
+        return view('index')->with([
+            'latestNews' => $news->getLatestNews()
+        ]);
     }
 
 }

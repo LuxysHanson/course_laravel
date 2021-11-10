@@ -7,13 +7,19 @@
 
 @section('content')
     <div class="site-section">
-        <h2>Новости</h2>
-        @forelse($news as $item)
-            <a href="{{ route('news.view', [ 'id' => $item['id'] ])  }}">
-                {{ $item['title'] ?? ''  }}
-            </a><br>
-        @empty
-            Нет новостей
-        @endforelse
+        <div class="container">
+            <div class="section-title mb-5">
+                <h2>Новости</h2>
+            </div>
+
+            @if(!empty($news))
+                @include('pages/news/template/_list', $news)
+            @else
+                <div class="alert alert-warning" role="alert">
+                    Нет добавленных новостей
+                </div>
+            @endif
+
+        </div>
     </div>
 @endsection
