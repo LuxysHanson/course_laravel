@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
 use App\Models\News;
 
 class NewsController extends Controller
@@ -19,6 +20,14 @@ class NewsController extends Controller
     {
 
         return $this->render('view')->with('news', $news->getNewsById($id));
+    }
+
+    public function add(Categories $categories)
+    {
+
+        return $this->render('add', [
+            'categories' => $categories->getCategoriesForForm()
+        ]);
     }
 
 }

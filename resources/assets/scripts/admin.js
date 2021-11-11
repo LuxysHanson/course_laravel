@@ -1,5 +1,7 @@
 import * as $ from 'jquery';
 
+require('bootstrap')
+
 $(document).ready(function () {
 
     $(".sidebar-dropdown > a").click(function () {

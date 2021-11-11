@@ -8,9 +8,18 @@
 @section('content')
     <div class="site-section">
         <div class="container">
-            <div class="section-title mb-5">
-                <h2>Новости</h2>
+
+            <div class="row">
+                <div class="col-auto">
+                    <div class="section-title mb-5">
+                        <h2>Новости</h2>
+                    </div>
+                </div>
+                <div class="col-auto ml-auto">
+                    <a href="{{ route('news.add') }}" class="more">Добавить новость</a>
+                </div>
             </div>
+
 
             @if(!empty($news))
                 @include('pages/news/template/_list', $news)

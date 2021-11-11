@@ -26,6 +26,8 @@ mix.js(assets_path + '/scripts/admin.js', 'public/js')
     .sourceMaps();
 
 
+mix.copyDirectory('node_modules/toastr/build/toastr.min.js', 'public/js')
+mix.copyDirectory('node_modules/jquery/dist/jquery.js', 'public/js')
 mix.copyDirectory('storage/app/site_images', 'public/images')
 
 

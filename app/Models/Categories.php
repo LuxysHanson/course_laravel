@@ -2,59 +2,44 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\File;
+
 class Categories
 {
 
     private $_news;
-
-    private $categories = [
-        1 => [
-            'id' => 1,
-            'title' => 'Спорт',
-            'text' => 'Следует отметить, что глубокий уровень погружения создаёт предпосылки для позиций, занимаемых участниками в отношении поставленных задач.',
-            'slug' => 'sport'
-        ],
-        2 => [
-            'id' => 2,
-            'title' => 'Политика',
-            'text' => 'Принимая во внимание показатели успешности, реализация намеченных плановых заданий обеспечивает широкому кругу (специалистов) участие в формировании приоритизации разума над эмоциями.',
-            'slug' => 'politika'
-        ],
-        3 => [
-            'id' => 3,
-            'title' => 'Технологии',
-            'text' => 'Каждый из нас понимает очевидную вещь: синтетическое тестирование играет важную роль в формировании вывода текущих активов. Идейные соображения высшего порядка, а также семантический разбор внешних противодействий обеспечивает актуальность благоприятных перспектив.',
-            'slug' => 'technology'
-        ],
-        4 => [
-            'id' => 4,
-            'title' => 'Бизнес',
-            'text' => 'В своём стремлении улучшить пользовательский опыт мы упускаем, что тщательные исследования конкурентов освещают чрезвычайно интересные особенности картины в целом, однако конкретные выводы, разумеется, смешаны с не уникальными данными до степени совершенной неузнаваемости, из-за чего возрастает их статус бесполезности.',
-            'slug' => 'business'
-        ]
-    ];
 
     public function __construct(News $news)
     {
         $this->_news = $news;
     }
 
-    public function getCategories()
+    public function getCategories(): array
     {
-        return $this->categories;
+        $news = File::get(storage_path() . '/categories.json');
+        return json_decode($news, JSON_OBJECT_AS_ARRAY) ?: [];
     }
 
-    public function getCategoryById($id)
+    public function getCategoryById(int $id): array
     {
         return $this->getCategories()[$id] ?? [];
     }
 
-    public function getNewsByCategoryId($id)
+    public function getNewsByCategoryId(int $id): array
     {
         $news = array_filter($this->_news->getNews(), function ($item) use ($id) {
             return $item['category_id'] == $id;
         });
         return $news ?: [];
+    }
+
+    public function getCategoriesForForm(): array
+    {
+        $formData = [];
+        foreach ($this->getCategories() as $id => $category) {
+            $formData[$id] = $category['title'];
+        }
+        return $formData;
     }
 
 }
