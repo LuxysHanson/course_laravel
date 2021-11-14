@@ -2,42 +2,44 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class Categories
 {
 
-    private static $categories = [
-        1 => [
-            'id' => 1,
-            'title' => 'Спорт',
-            'text' => 'А у нас новость 1 и она очень хорошая!',
-            'slug' => 'sport'
-        ],
-        2 => [
-            'id' => 2,
-            'title' => 'Политика',
-            'text' => 'А тут плохие новости(((',
-            'slug' => 'politika'
-        ]
-    ];
+    private $_news;
 
-    public static function getCategories()
+    public function __construct(News $news)
     {
-        return static::$categories;
+        $this->_news = $news;
     }
 
-    public static function getCategoryId($id)
+    public function getCategories(): array
     {
-        return self::$categories[$id] ?? [];
+        $news = File::get(storage_path() . '/categories.json');
+        return json_decode($news, JSON_OBJECT_AS_ARRAY) ?: [];
     }
 
-    public static function getNewsByCategory($id)
+    public function getCategoryById(int $id): array
     {
-        $news = array_filter(News::getNews(), function ($item) use ($id) {
+        return $this->getCategories()[$id] ?? [];
+    }
+
+    public function getNewsByCategoryId(int $id): array
+    {
+        $news = array_filter($this->_news->getNews(), function ($item) use ($id) {
             return $item['category_id'] == $id;
         });
         return $news ?: [];
+    }
+
+    public function getCategoriesForForm(): array
+    {
+        $formData = [];
+        foreach ($this->getCategories() as $id => $category) {
+            $formData[$id] = $category['title'];
+        }
+        return $formData;
     }
 
 }

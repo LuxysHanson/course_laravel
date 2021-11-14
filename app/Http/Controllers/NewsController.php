@@ -2,23 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
 use App\Models\News;
 
 class NewsController extends Controller
 {
 
-    public function index()
-    {
-        $news = News::getNews();
+    protected $prefix_view = 'pages.news';
 
-        return view('news.index')->with('news', $news);
+    public function index(News $news)
+    {
+
+        return $this->render('index')->with('news', $news->getNews());
     }
 
-    public function view($id)
+    public function view(News $news, int $id)
     {
-        $news = News::getNewsId($id);
 
-        return view('news.view')->with('news', $news);
+        return $this->render('view')->with('news', $news->getNewsById($id));
+    }
+
+    public function add(Categories $categories)
+    {
+
+        return $this->render('add', [
+            'categories' => $categories->getCategoriesForForm()
+        ]);
     }
 
 }

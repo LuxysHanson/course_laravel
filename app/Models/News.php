@@ -2,37 +2,45 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class News
 {
 
-    private static $news = [
-        1 => [
-            'id' => 1,
-            'title' => 'Новость 1',
-            'text' => 'А у нас новость 1 и она очень хорошая!',
-            'slug' => 'novost1',
-            'category_id' => 1
-        ],
-        2 => [
-            'id' => 2,
-            'title' => 'Новость 2',
-            'text' => 'А тут плохие новости(((',
-            'slug' => 'novost2',
-            'category_id' => 2
-        ]
-    ];
-
-    public static function getNews()
+    public function getNews(): array
     {
-//        dump(Str::slug('Новость 1'));
-        return static::$news;
+        $news = File::get(storage_path() . '/news.json');
+        return json_decode($news, JSON_OBJECT_AS_ARRAY) ?: [];
     }
 
-    public static function getNewsId($id)
+    public function getSortedNews(): array
     {
-        return self::$news[$id] ?? [];
+        $dateArray = [];
+        $news = $this->getNews();
+        if (!empty($news)) {
+            foreach($news as $id => $arr){
+                $dateArray[$id] = $arr['created_at'];
+            }
+        }
+
+        array_multisort($dateArray, SORT_STRING, $news);
+        return $news;
     }
+
+    public function getNewsById(int $id): array
+    {
+        return $this->getNews()[$id] ?? [];
+    }
+
+    public function getLatestNews(int $limit = 3): array
+    {
+        $news = $this->getSortedNews();
+        return array_slice($news, 0, $limit);
+    }
+
+    /*public function getShortText(int $length = 250): string
+    {
+        dd($this);
+    }*/
 
 }
