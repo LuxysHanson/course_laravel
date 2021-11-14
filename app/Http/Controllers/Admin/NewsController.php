@@ -10,6 +10,7 @@ use App\Models\News;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -45,9 +46,15 @@ class NewsController extends Controller
             $data[] = $formData;
             $lastKey = array_key_last($data);
 
+            $image_url = '';
+            if ($image = $request->file('image')) {
+                $path = Storage::putFile('public/images/news', $image);
+                $image_url = Storage::url($path);
+            }
+
             $data[$lastKey]['id'] = $lastKey;
             $data[$lastKey]['slug'] = Str::slug($formData['title']);
-            $data[$lastKey]['image'] = ''; // заглушка
+            $data[$lastKey]['image'] = $image_url;
             $data[$lastKey]['created_at'] = Carbon::now()->format('Y-m-d H:i:s');
             $data[$lastKey]['category_id'] = (int)$formData['category_id'];
             $data[$lastKey]['is_moderate'] = (int)$formData['is_moderate'];

@@ -15,6 +15,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
+
 </head>
 <body>
 <div id="app">

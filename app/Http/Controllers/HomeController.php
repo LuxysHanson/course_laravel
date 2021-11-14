@@ -9,6 +9,7 @@ class HomeController extends Controller
 
     public function index(News $news)
     {
+//        $latestNews =
         return view('index')->with([
             'latestNews' => $news->getLatestNews()
         ]);

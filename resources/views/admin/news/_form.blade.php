@@ -1,4 +1,9 @@
-{{ Form::open(['url' => route('admin.news.add', [ 'place' => $place ])]) }}
+{{
+    Form::open([
+        'url' => route('admin.news.add', [ 'place' => $place ]),
+        'enctype' => 'multipart/form-data'
+    ])
+}}
 
     <div class="form-group">
         {{ Form::label('news_title', 'Заголовок новости') }}
@@ -23,6 +28,14 @@
             'class' => 'form-control',
             'placeholder' => 'Введите текст',
             'rows' => 5
+        ]) }}
+    </div>
+
+    <div class="form-group">
+        {{ Form::label('news_image', 'Фото к новости') }}
+        {{ Form::input('file', 'image', old('image'), [
+            'id' => 'news_image',
+            'class' => 'd-block'
         ]) }}
     </div>
 

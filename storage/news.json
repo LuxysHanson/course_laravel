@@ -27,23 +27,93 @@
         "created_at": "2021-09-06 05:10:00"
     },
     "4": {
-        "title": "test 123",
-        "category_id": 3,
-        "text": "В частности, постоянное информационно-пропагандистское обеспечение нашей деятельности обеспечивает актуальность благоприятных перспектив. С учётом сложившейся международной обстановки, внедрение современных методик требует определения и уточнения прогресса профессионального сообщества. Принимая во внимание показатели успешности, убеждённость некоторых оппонентов однозначно определяет каждого участника как способного принимать собственные решения касаемо системы обучения кадров, соответствующей насущным потребностям.",
+        "title": "tesst",
+        "category_id": 1,
+        "text": "fghty",
+        "is_moderate": 0,
         "id": 4,
-        "slug": "test-123",
-        "image": "",
-        "created_at": "2021-11-11 08:54:15"
+        "slug": "tesst",
+        "image": "http:\/\/localhost\/uploads\/public\/images\/news\/XAmDMV7WpzqjR0sKtumEoPaEr2dOmtOJfohpF8k7.jpg",
+        "created_at": "2021-11-14 13:41:40"
     },
     "5": {
-        "title": "ghjghj",
-        "category_id": 2,
-        "text": "dfgdfgdfg",
-        "is_moderate": 1,
-        "place": "frontend",
+        "title": "tesst",
+        "category_id": 1,
+        "text": "fgytyty",
+        "is_moderate": 0,
         "id": 5,
-        "slug": "ghjghj",
-        "image": "",
-        "created_at": "2021-11-11 09:11:36"
+        "slug": "tesst",
+        "image": "http:\/\/homework.loc\/uploads\/public\/images\/news\/dt09hnz0NpFiIYE1LjenDL1kVc3Aw8G6JRfON26B.jpg",
+        "created_at": "2021-11-14 13:44:16"
+    },
+    "6": {
+        "title": "test 123",
+        "category_id": 1,
+        "text": "fgty",
+        "is_moderate": 0,
+        "id": 6,
+        "slug": "test-123",
+        "image": "\/storage\/images\/news\/PRhXZgVOXeGO7i9f8J269DiQefC39bxtoB0qYJc9.jpg",
+        "created_at": "2021-11-14 13:47:10"
+    },
+    "7": {
+        "title": "test 123",
+        "category_id": 1,
+        "text": "rtgh",
+        "is_moderate": 0,
+        "id": 7,
+        "slug": "test-123",
+        "image": "http:\/\/homework.loc\/uploads\/public\/images\/news\/73hiDS3J7WpFW6JHGlgJ4FgqmD0EiJTx1YQ6jk70.jpg",
+        "created_at": "2021-11-14 13:48:38"
+    },
+    "8": {
+        "title": "test 123",
+        "category_id": 2,
+        "text": "fgty",
+        "is_moderate": 0,
+        "id": 8,
+        "slug": "test-123",
+        "image": "http:\/\/homework.loc\/uploads\/public\/images\/news\/svzMwX8MSNLFG3efGuWCEwCLOkwpKsAHdNUf0nxM.jpg",
+        "created_at": "2021-11-14 13:50:28"
+    },
+    "9": {
+        "title": "test 123",
+        "category_id": 1,
+        "text": "cvbgh",
+        "is_moderate": 0,
+        "id": 9,
+        "slug": "test-123",
+        "image": "http:\/\/homework.loc\/uploads\/images\/public\/images\/news\/hnW9GCrk1hYIv9UsvJHjphaEO46JGafo7O4EdiJH.jpg",
+        "created_at": "2021-11-14 13:54:37"
+    },
+    "10": {
+        "title": "test 123",
+        "category_id": 1,
+        "text": "vbgh",
+        "is_moderate": 0,
+        "id": 10,
+        "slug": "test-123",
+        "image": "http:\/\/homework.loc\/uploads\/public\/images\/news\/i7QELvnEMWK8ocffEZzh6orSAZYVdrEaYBwNo3eq.jpg",
+        "created_at": "2021-11-14 13:58:22"
+    },
+    "11": {
+        "title": "test 123",
+        "category_id": 1,
+        "text": "vbgh",
+        "is_moderate": 0,
+        "id": 11,
+        "slug": "test-123",
+        "image": "http:\/\/homework.loc\/storage\/public\/images\/news\/HD86wRDXfnqjXS2xEtutOFvR97ElRC6E0LE2mLcK.jpg",
+        "created_at": "2021-11-14 13:59:27"
+    },
+    "12": {
+        "title": "test 123",
+        "category_id": 1,
+        "text": "fgt",
+        "is_moderate": 0,
+        "id": 12,
+        "slug": "test-123",
+        "image": "\/storage\/images\/news\/VeUtMJlvpmc4VscnjNzgT65iemgM2MHyKHUJ1UWd.jpg",
+        "created_at": "2021-11-14 14:00:37"
     }
 }
