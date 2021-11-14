@@ -26,9 +26,7 @@
         ]) }}
     </div>
 
-    @if($place == 'frontend')
-        {{ Form::input('hidden', 'is_moderate', 1) }}
-    @endif
+    {{ Form::input('hidden', 'is_moderate', $place == 'frontend') }}
 
     <div class="d-flex justify-content-end">
         {{ Form::submit('Добавить', [ 'class' => "btn btn-outline-primary" ]) }}
