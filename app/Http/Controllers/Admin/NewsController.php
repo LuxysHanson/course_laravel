@@ -34,21 +34,26 @@ class NewsController extends Controller
     public function add(Request $request, News $news)
     {
         if ($request->isMethod('post')) {
-            $formData = $request->except('_token');
+            $formData = $request->only([
+                'title',
+                'category_id',
+                'text',
+                'is_moderate'
+            ]);
 
-            $news = $news->getNews();
-            $lastKey = array_key_last($news);
+            $data = $news->getNews();
+            $data[] = $formData;
+            $lastKey = array_key_last($data);
 
-            $formData['id'] = ++$lastKey;
-            $formData['slug'] = Str::slug($formData['title']);
-            $formData['image'] = ''; // заглушка
-            $formData['created_at'] = Carbon::now()->format('Y-m-d H:i:s');
-            $formData['category_id'] = (int)$formData['category_id'];
-            $formData['is_moderate'] = (int)$formData['is_moderate'];
+            $data[$lastKey]['id'] = $lastKey;
+            $data[$lastKey]['slug'] = Str::slug($formData['title']);
+            $data[$lastKey]['image'] = ''; // заглушка
+            $data[$lastKey]['created_at'] = Carbon::now()->format('Y-m-d H:i:s');
+            $data[$lastKey]['category_id'] = (int)$formData['category_id'];
+            $data[$lastKey]['is_moderate'] = (int)$formData['is_moderate'];
 
-            $news[$lastKey] = $formData;
 
-            File::put(storage_path() . '/news.json', json_encode($news, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+            File::put(storage_path() . '/news.json', json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 
             if ($request->get('place') == 'frontend') {
                 return redirect()->route('news.index');
