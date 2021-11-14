@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Support\Facades\File;
 
-class Categories
+class Category
 {
 
     private $_news;

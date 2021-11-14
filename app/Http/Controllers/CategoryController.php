@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categories;
+use App\Models\Category;
 
-class CategoriesController extends Controller
+class CategoryController extends Controller
 {
 
     protected $prefix_view = 'pages/categories';
 
-    public function index(Categories $categories)
+    public function index(Category $categories)
     {
 
         return $this->render('index', [
@@ -17,7 +17,7 @@ class CategoriesController extends Controller
         ]);
     }
 
-    public function view(Categories $categories, int $id)
+    public function view(Category $categories, int $id)
     {
 
         return $this->render('view', [

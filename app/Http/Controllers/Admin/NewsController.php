@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\NewsExportType;
+use App\Components\Enums\NewsExportType;
 use App\Exports\NewsExport;
 use App\Http\Controllers\Controller;
-use App\Models\Categories;
+use App\Models\Category;
 use App\Models\News;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -23,7 +23,7 @@ class NewsController extends Controller
         return $this->render('index');
     }
 
-    public function create(Categories $categories)
+    public function create(Category $categories)
     {
 
         return $this->render('create', [
