@@ -12,9 +12,9 @@
                 <div class="single-content">
 
                     <p class="mb-5">
-                        <img src="{{ asset('images/'. $news['image']) }}" alt="Image" class="img-fluid">
+                        <img src="{{ $news->image ?: asset('uploads/images/news/default_news.jpg') }}" alt="Image" class="img-fluid">
                     </p>
-                    <h1 class="mb-4">{{ $news['title'] ?? '' }}</h1>
+                    <h1 class="mb-4">{{ $news->title }}</h1>
 {{--                    <div class="post-meta d-flex mb-5">--}}
 {{--                        <div class="bio-pic mr-3">--}}
 {{--                            <img src="images/person_1.jpg" alt="Image" class="img-fluidid">--}}
@@ -27,7 +27,7 @@
 {{--                    </div>--}}
 
                     <div class="news-content">
-                        {{ $news['text'] ?? '' }}
+                        {{ $news->description }}
                     </div>
 
 {{--                    <div class="pt-5">--}}

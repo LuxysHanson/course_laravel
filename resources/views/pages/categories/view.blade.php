@@ -1,7 +1,7 @@
 @extends('layouts/app')
 
 @section('title')
-    @parent Новости по категории "{{ $category['title'] ?? '' }}"
+    @parent Новости по категории "{{ $category->title ?? '' }}"
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
         <div class="container">
             <div class="section-title">
                 <span class="caption d-block small">Категория</span>
-                <h2>{{ $category['title'] ?? '' }}</h2>
+                <h2>{{ $category->title ?? '' }}</h2>
             </div>
 
             @if(!empty($news))

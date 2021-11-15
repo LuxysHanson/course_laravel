@@ -22,9 +22,9 @@
     </div>
 
     <div class="form-group">
-        {{ Form::label('news_text', 'Текст новости') }}
-        {{ Form::textarea('text', old('text'), [
-            'id' => 'news_text',
+        {{ Form::label('news_description', 'Текст новости') }}
+        {{ Form::textarea('description', old('description'), [
+            'id' => 'news_description',
             'class' => 'form-control',
             'placeholder' => 'Введите текст',
             'rows' => 5
