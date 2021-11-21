@@ -15,11 +15,11 @@
                     Экспортировать
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('admin.news.export', [ 'type' => \App\Enums\NewsExportType::TYPE_JSON ]) }}">
+                    <a class="dropdown-item" href="{{ route('admin.news.export', [ 'type' => \App\Components\Enums\NewsExportType::TYPE_JSON ]) }}">
                         в JSON формате
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ route('admin.news.export', [ 'type' => \App\Enums\NewsExportType::TYPE_EXCEL ]) }}">
+                    <a class="dropdown-item" href="{{ route('admin.news.export', [ 'type' => \App\Components\Enums\NewsExportType::TYPE_EXCEL ]) }}">
                         в EXCEL формате
                     </a>
                 </div>

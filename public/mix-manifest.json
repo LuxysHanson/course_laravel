@@ -5,11 +5,5 @@
     "/css/app.css": "/css/app.css",
     "/js/toastr.min.js": "/js/toastr.min.js",
     "/js/jquery.js": "/js/jquery.js",
-    "/images/img_h_1.jpg": "/images/img_h_1.jpg",
-    "/images/img_h_2.jpg": "/images/img_h_2.jpg",
-    "/images/img_v_1.jpg": "/images/img_v_1.jpg",
-    "/images/img_v_2.jpg": "/images/img_v_2.jpg",
-    "/images/img_v_3.jpg": "/images/img_v_3.jpg",
-    "/images/img_v_4.jpg": "/images/img_v_4.jpg",
-    "/images/person_1.jpg": "/images/person_1.jpg"
+    "/css/toastr.min.css": "/css/toastr.min.css"
 }

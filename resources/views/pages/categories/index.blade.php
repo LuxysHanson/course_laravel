@@ -15,11 +15,11 @@
                 <div class="post-entry-2 d-flex">
                     <div class="pl-0">
                         <h2>
-                            <a href="{{ route('news.category', [ 'id' => $item['id'] ]) }}">
-                                {{ $item['title'] }}
+                            <a href="{{ route('news.category', [ 'id' => $item->id ]) }}">
+                                {{ $item->title }}
                             </a>
                         </h2>
-                        <p class="mb-3">{{ $item['text'] }}</p>
+                        <p class="mb-3">{{ $item->description }}</p>
                     </div>
                 </div>
             @empty
