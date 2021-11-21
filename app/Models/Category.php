@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
 
-class Category
+class Category extends Model
 {
+
+    protected $table = 'news_category';
 
     // Получает категории из файла
     public static function getCategories(): array

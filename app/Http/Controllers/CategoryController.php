@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -11,7 +11,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = DB::table('news_category')->get()->all();
+        $categories = Category::query()->paginate(3);
 
         return $this->render('index', [
             'categories' => $categories
@@ -20,8 +20,8 @@ class CategoryController extends Controller
 
     public function view(int $id)
     {
-        $category = DB::table('news_category')->find($id);
-        $news = DB::table('news')->where('category_id', $id)->get()->all();
+        $category = Category::query()->find($id);
+        $news = Category::query()->where('category_id', $id)->get()->all();
 
         return $this->render('view', [
             'category' => $category,

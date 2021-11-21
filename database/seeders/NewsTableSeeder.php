@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\News;
 use Carbon\Carbon;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class NewsTableSeeder extends Seeder
@@ -18,7 +19,7 @@ class NewsTableSeeder extends Seeder
     public function run()
     {
         $newsData = $this->getData();
-        DB::table('news')->insert($newsData);
+        News::query()->insert($newsData);
     }
 
     private function getData(): array
@@ -26,7 +27,7 @@ class NewsTableSeeder extends Seeder
         $data = [];
         $faker = Factory::create('ru_RU');
 
-        $categoryIds = DB::table('news_category')->get(['id'])->map(function ($category) {
+        $categoryIds = Category::query()->get(['id'])->map(function ($category) {
             return (int)$category->id;
         })->toArray();
 

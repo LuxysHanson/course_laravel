@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
+use App\Models\News;
 
 class HomeController extends Controller
 {
 
     public function index()
     {
-        $latestNews = DB::table('news')->where([
+        $latestNews = News::query()->where([
             'is_moderate' => 0
         ])->orderBy('created_at', 'DESC')->limit(3)->get()->all();
 

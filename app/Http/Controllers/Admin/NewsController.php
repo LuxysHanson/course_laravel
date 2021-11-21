@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Components\Enums\NewsExportType;
 use App\Exports\NewsExport;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\News;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
@@ -24,7 +25,7 @@ class NewsController extends Controller
 
     public function create()
     {
-        $categories = DB::table('news_category')->pluck('title', 'id')->all();
+        $categories = Category::query()->pluck('title', 'id')->all();
 
         return $this->render('create', [
             'categories' => $categories
@@ -53,7 +54,7 @@ class NewsController extends Controller
             $formData['category_id'] = (int)$formData['category_id'];
             $formData['is_moderate'] = (int)$formData['is_moderate'];
 
-            DB::table('news')->insert($formData);
+            News::query()->insert($formData);
 
             if ($request->get('place') == 'frontend') {
                 return redirect()->route('news.index');
@@ -71,7 +72,7 @@ class NewsController extends Controller
             return Excel::download(new NewsExport,  $fileName. '.xlsx');
         }
 
-        $allNews = DB::table('news')->get()->all();
+        $allNews = News::query()->get()->all();
         return response()->json($allNews)
             ->header('Content-Disposition', 'attachment; filename = '. $fileName .'.txt')
             ->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);

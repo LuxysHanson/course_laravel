@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
 
-class News
+class News extends Model
 {
 
     // Получает новости из файла
