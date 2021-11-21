@@ -16,4 +16,9 @@ class Category extends Model
         return json_decode(File::get(storage_path() . '/categories.json'), true) ?: [];
     }
 
+    public function news()
+    {
+        return $this->hasMany(News::class);
+    }
+
 }

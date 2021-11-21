@@ -14,7 +14,10 @@
 
             <div class="card-body">
 
-                @include('admin/news/_form', [ 'place' => 'frontend' ])
+                @include('admin/news/_form', [
+                    'formLink' => route('admin.news.store'),
+                    'place' => \App\Components\Enums\ApplicationEnum::TYPE_FRONTEND
+                ])
 
             </div>
         </div>

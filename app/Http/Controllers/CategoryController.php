@@ -20,12 +20,11 @@ class CategoryController extends Controller
 
     public function view(int $id)
     {
-        $category = Category::query()->find($id);
-        $news = Category::query()->where('category_id', $id)->get()->all();
+        $category = Category::query()->with('news')->find($id);
 
         return $this->render('view', [
             'category' => $category,
-            'news' => $news
+            'news' => $category->news
         ]);
     }
 

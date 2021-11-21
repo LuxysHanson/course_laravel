@@ -46,14 +46,17 @@ Route::name('admin.')
         Route::get('/test2', [IndexController::class, 'test2'])->name('test2');
 
         // Новости
-        Route::name('news.')
+       /* Route::name('news.')
             ->prefix('news')
             ->group(function () {
                 Route::get('/index', [AdminNewsController::class, 'index'])->name('index');
                 Route::get('/export', [AdminNewsController::class, 'export'])->name('export');
                 Route::get( '/create', [AdminNewsController::class, 'create'])->name('create');
                 Route::post('/add', [AdminNewsController::class, 'add'])->name('add');
-            });
+            });*/
+
+        Route::get('/news/export', [AdminNewsController::class, 'export'])->name('news.export');
+        Route::resource('/news', AdminNewsController::class);
     });
 
 
