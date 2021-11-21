@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -25,10 +24,6 @@ class NewsCategoryTableSeeder extends Seeder
     {
         $data = [];
         $faker = Factory::create('ru_RU');
-
-        foreach (Category::getCategories() as $item) {
-            $data[] = $item;
-        }
 
         for ($i = 0; $i <= 5; $i++) {
             $newsTitle = $faker->realText(rand(10, 45));

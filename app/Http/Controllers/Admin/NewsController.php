@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Components\Enums\NewsExportType;
 use App\Exports\NewsExport;
 use App\Http\Controllers\Controller;
-use App\Models\News;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -64,7 +63,7 @@ class NewsController extends Controller
         return '';
     }
 
-    public function export(Request $request, News $news)
+    public function export(Request $request)
     {
         $fileName = 'news_list_'. date('Y-m-d_H_i');
 
@@ -72,7 +71,8 @@ class NewsController extends Controller
             return Excel::download(new NewsExport,  $fileName. '.xlsx');
         }
 
-        return response()->json(DB::table('news')->get()->all())
+        $allNews = DB::table('news')->get()->all();
+        return response()->json($allNews)
             ->header('Content-Disposition', 'attachment; filename = '. $fileName .'.txt')
             ->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }

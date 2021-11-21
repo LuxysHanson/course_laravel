@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\News;
 use Carbon\Carbon;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
@@ -30,11 +29,6 @@ class NewsTableSeeder extends Seeder
         $categoryIds = DB::table('news_category')->get(['id'])->map(function ($category) {
             return (int)$category->id;
         })->toArray();
-
-        foreach (News::getNews() as $item) {
-            $item['category_id'] = rand($categoryIds[0], end($categoryIds));
-            $data[] = $item;
-        }
 
         for ($i = 0; $i <= 8; $i++) {
             $newsTitle = $faker->realText(rand(10, 45));
