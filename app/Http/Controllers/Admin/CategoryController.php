@@ -4,28 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use App\Components\Enums\ApplicationEnum;
 use App\Http\Controllers\Controller;
-use App\Interfaces\NewsRepositoryInterface;
 use App\Models\News;
 use Illuminate\Http\Request;
 
-class NewsController extends Controller
+class CategoryController extends Controller
 {
 
-    protected $prefix_view = 'admin.news';
+    protected $prefix_view = 'admin.categories';
 
-    /** @var NewsRepositoryInterface $repository */
-    private $repository;
-
-    public function __construct(NewsRepositoryInterface $newsRepository)
-    {
-        $this->repository = $newsRepository;
-    }
 
     public function index()
     {
         $news = News::query()->filter()->orderBy('created_at', 'DESC')->paginate(15);
 
-        return $this->render('index')->with('news', $news);
+        return $this->render('index')->with('categories', $news);
     }
 
     public function create()
@@ -77,7 +69,7 @@ class NewsController extends Controller
 
     public function export(Request $request)
     {
-       return $this->repository->dataExport((int)$request->get('type'));
+        return $this->repository->dataExport((int)$request->get('type'));
     }
 
 }

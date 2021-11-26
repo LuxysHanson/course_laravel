@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\IndexController;
-use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,17 +47,12 @@ Route::name('admin.')
         Route::get('/test2', [IndexController::class, 'test2'])->name('test2');
 
         // Новости
-       /* Route::name('news.')
-            ->prefix('news')
-            ->group(function () {
-                Route::get('/index', [AdminNewsController::class, 'index'])->name('index');
-                Route::get('/export', [AdminNewsController::class, 'export'])->name('export');
-                Route::get( '/create', [AdminNewsController::class, 'create'])->name('create');
-                Route::post('/add', [AdminNewsController::class, 'add'])->name('add');
-            });*/
-
         Route::get('/news/export', [AdminNewsController::class, 'export'])->name('news.export');
         Route::resource('/news', AdminNewsController::class);
+
+        // Категории
+        Route::get('/categories/export', [AdminCategoryController::class, 'export'])->name('categories.export');
+        Route::resource('/categories', AdminCategoryController::class);
     });
 
 

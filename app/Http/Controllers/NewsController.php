@@ -2,13 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Interfaces\NewsRepositoryInterface;
 use App\Models\News;
+use App\Repositories\NewsRepository;
 
 class NewsController extends Controller
 {
 
     protected $prefix_view = 'pages.news';
+
+    /** @var NewsRepository $repository */
+    private $repository;
+
+    public function __construct(NewsRepositoryInterface $newsRepository)
+    {
+        $this->repository = $newsRepository;
+    }
 
     public function index()
     {
@@ -26,10 +35,9 @@ class NewsController extends Controller
 
     public function add()
     {
-        $categories = Category::query()->pluck('title', 'id')->all();
 
         return $this->render('add', [
-            'categories' => $categories
+            'categories' => $this->repository->getCategoryList()
         ]);
     }
 
