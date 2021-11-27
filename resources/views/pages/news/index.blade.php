@@ -15,9 +15,13 @@
                         <h2>Новости</h2>
                     </div>
                 </div>
-                <div class="col-auto ml-auto">
-                    <a href="{{ route('news.add') }}" class="more">Добавить новость</a>
-                </div>
+
+                @if(!Auth::guest())
+                    <div class="col-auto ml-auto">
+                        <a href="{{ route('news.add') }}" class="more">Добавить новость</a>
+                    </div>
+                @endif
+
             </div>
 
 

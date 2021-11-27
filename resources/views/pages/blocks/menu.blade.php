@@ -20,11 +20,6 @@
                 </a>
             </div>
             <div class="col-12 col-lg-6 ml-auto d-flex">
-                <div class="ml-md-auto top-social d-none d-lg-inline-block">
-                    <a href="#" class="d-inline-block p-3"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="d-inline-block p-3"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="d-inline-block p-3"><i class="fab fa-instagram"></i></a>
-                </div>
                 {{--                    <form action="#" class="search-form d-inline-block">--}}
 
                 {{--                        <div class="d-flex">--}}
@@ -32,6 +27,43 @@
                 {{--                            <button type="submit" class="btn btn-secondary" ><span class="icon-search"></span></button>--}}
                 {{--                        </div>--}}
                 {{--                    </form>--}}
+
+
+            <!-- Right Side Of Navbar -->
+                <ul class="nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Войти') }}</a>
+                            </li>
+                        @endif
+
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Зарегистрироваться') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        <div class="dropdown">
+                            <a href="javascript:void(0)" class="drop-btn more">{{ Auth::user()->name }}</a>
+                            <div class="dropdown-content">
+                                <a class="dropdown-item" href="{{ route('profile') }}">
+                                    {{ __('Профиль') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Выход') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </div>
+                    @endguest
+                </ul>
 
 
             </div>
@@ -59,9 +91,13 @@
                             <li class="{{ request()->routeIs('about') ? 'active' : '' }}">
                                 <a href="{{ route('about') }}" class="nav-link text-left">О нас</a>
                             </li>
-                            <li class="{{ request()->routeIs('admin.index') ? 'active' : '' }}">
-                                <a href="{{ route('admin.index') }}" class="nav-link text-left">Админка</a>
-                            </li>
+
+                            @if(!Auth::guest() && Auth::user()->role == \App\Components\Enums\UsersRoleEnum::ROLE_ADMIN)
+                                <li class="{{ request()->routeIs('admin.index') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.index') }}" class="nav-link text-left">Админка</a>
+                                </li>
+                            @endif
+
                         </ul>
                     </nav>
 

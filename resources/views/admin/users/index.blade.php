@@ -1,14 +1,14 @@
 @extends('layouts/admin')
 
 @section('title')
-    @parent {{ __('Все категории') }}
+    @parent {{ __('Все пользователи') }}
 @endsection
 
 @section('content')
 
     <div class="card-header">
         <div class="row">
-            <div class="col-auto">{{ __('Все категории') }}</div>
+            <div class="col-auto">{{ __('Все пользователи') }}</div>
             <div class="col-auto ml-auto">
                 <div class="btn-group">
                     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
@@ -17,7 +17,7 @@
                     <div class="dropdown-menu">
                         <?php $exportTypes = \App\Components\Enums\News\ExportTypeEnum::labels() ?>
                         @foreach($exportTypes as $key => $value)
-                            <a class="dropdown-item" href="{{ route('admin.categories.export', [ 'type' => $key ]) }}">
+                            <a class="dropdown-item" href="{{ route('admin.users.export', [ 'type' => $key ]) }}">
                                 {{ $value }}
                             </a>
                             @if(array_key_last($exportTypes) != $key)
@@ -34,19 +34,20 @@
         <div class="categories-content">
 
             <div class="list-group mt-3">
-                @forelse($categories as $item)
+                @forelse($users as $item)
                     <div class="news-item mb-2">
                         <a class="list-group-item list-group-item-action flex-column align-items-start"
-                           href="{{ route('admin.categories.show', $item) }}">
+                           href="{{ route('admin.users.show', $item) }}">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">{{ $item->title }}</h5>
+                                <h5 class="mb-1">{{ $item->name }}</h5>
+                                <p>{{ \App\Components\Enums\UsersRoleEnum::labels()[$item->role] ?? '' }}</p>
                             </div>
-                            <p class="mb-1">{{ \App\Components\Helpers\StringHelper::getShortText($item->description ?? '') }}</p>
+                            <p class="mb-1">{{ $item->email }}</p>
 
-                            <form action="{{ route('admin.categories.destroy', $item) }}" method="post">
+                            <form action="{{ route('admin.users.destroy', $item) }}" method="post">
                                 <span class="d-flex mt-3 justify-content-end">
                                     <object>
-                                        <a href="{{ route('admin.categories.edit', $item) }}" class="btn btn-info">
+                                        <a href="{{ route('admin.users.edit', $item) }}" class="btn btn-info">
                                             {{ __('Редактировать') }}
                                         </a>
                                         @csrf
