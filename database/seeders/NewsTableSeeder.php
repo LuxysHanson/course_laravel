@@ -25,7 +25,7 @@ class NewsTableSeeder extends Seeder
     private function getData(): array
     {
         $data = [];
-        $faker = Factory::create('ru_RU');
+        $faker = Factory::create();
 
         $categoryIds = Category::query()->get(['id'])->map(function ($category) {
             return (int)$category->id;

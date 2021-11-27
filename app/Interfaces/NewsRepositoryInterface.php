@@ -2,13 +2,13 @@
 
 namespace App\Interfaces;
 
+use App\Http\Requests\NewsRequest;
 use App\Models\News;
-use Illuminate\Http\Request;
 
 interface NewsRepositoryInterface
 {
     public function getCategoryList();
-    public function dataStorage(Request $request, News $news);
+    public function dataStorage(NewsRequest $request, News $news);
     public function dataExport(int $type);
 
 }

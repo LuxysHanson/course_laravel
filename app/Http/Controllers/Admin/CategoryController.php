@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoriesRequest;
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -48,13 +49,13 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('message', 'Категория успешно удалено!');
     }
 
-    public function update(Request $request, Category $category)
+    public function update(CategoriesRequest $request, Category $category)
     {
         $this->repository->dataStorage($request, $category);
         return redirect()->route('admin.categories.index')->with('message', 'Категория успешно изменено!');
     }
 
-    public function store(Request $request, Category $category)
+    public function store(CategoriesRequest $request, Category $category)
     {
         $this->repository->dataStorage($request, $category);
         return redirect()->route('admin.categories.index')->with('message', 'Категория успешно добавлена!');

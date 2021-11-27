@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Components\Enums\ApplicationEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NewsRequest;
 use App\Interfaces\NewsRepositoryInterface;
 use App\Models\News;
 use Illuminate\Http\Request;
@@ -59,13 +60,13 @@ class NewsController extends Controller
         return redirect()->route('admin.news.index')->with('message', 'Новость успешно удалено!');
     }
 
-    public function update(Request $request, News $news)
+    public function update(NewsRequest $request, News $news)
     {
         $this->repository->dataStorage($request, $news);
         return redirect()->route('admin.news.index')->with('message', 'Новость успешно изменено!');
     }
 
-    public function store(Request $request, News $news)
+    public function store(NewsRequest $request, News $news)
     {
         $this->repository->dataStorage($request, $news);
 

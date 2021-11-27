@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Components\Enums\News\ExportTypeEnum;
 use App\Components\Helpers\ImageHelper;
 use App\Exports\NewsExport;
+use App\Http\Requests\NewsRequest;
 use App\Interfaces\NewsRepositoryInterface;
 use App\Models\Category;
 use App\Models\News;
@@ -20,8 +21,10 @@ class NewsRepository implements NewsRepositoryInterface
         return Category::query()->pluck('title', 'id')->all();
     }
 
-    public function dataStorage(Request $request, News $news)
+    public function dataStorage(NewsRequest $request, News $news)
     {
+        $request->validated();
+
         $news->fill($request->all());
         $news->slug = Str::slug($news->title);
         $news->image = ImageHelper::getImageUrlToSaving($request->file('image'));

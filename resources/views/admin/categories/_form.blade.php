@@ -19,6 +19,11 @@
             'id' => 'category_title',
             'class' => 'form-control'
         ]) }}
+
+        @error('title')
+            <div class="alert alert-danger mt-3">{{ $message }}</div>
+        @enderror
+
     </div>
 
     <div class="form-group">
@@ -29,6 +34,11 @@
             'placeholder' => 'Введите текст',
             'rows' => 5
         ]) }}
+
+        @error('description')
+            <div class="alert alert-danger mt-3">{{ $message }}</div>
+        @enderror
+
     </div>
 
     <div class="d-flex justify-content-end">
