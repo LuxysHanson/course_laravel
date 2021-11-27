@@ -19,6 +19,11 @@
             'id' => 'news_title',
             'class' => 'form-control'
         ]) }}
+
+        @error('title')
+            <div class="alert alert-danger mt-3">{{ $message }}</div>
+        @enderror
+
     </div>
 
     <div class="form-group">
@@ -27,6 +32,11 @@
             'id' => 'news_category',
             'class' => 'form-control'
         ]) }}
+
+        @error('category_id')
+            <div class="alert alert-danger mt-3">{{ $message }}</div>
+        @enderror
+
     </div>
 
     <div class="form-group">
@@ -37,6 +47,11 @@
             'placeholder' => 'Введите текст',
             'rows' => 5
         ]) }}
+
+        @error('description')
+            <div class="alert alert-danger mt-3">{{ $message }}</div>
+        @enderror
+
     </div>
 
     <div class="form-group">
@@ -45,6 +60,11 @@
             'id' => 'news_image',
             'class' => 'd-block'
         ]) }}
+
+        @error('image')
+            <div class="alert alert-danger mt-3">{{ $message }}</div>
+        @enderror
+
     </div>
 
     @php

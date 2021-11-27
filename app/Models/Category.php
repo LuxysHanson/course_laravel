@@ -2,13 +2,22 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
 
 class Category extends Model
 {
+    use HasFactory;
+
+    public $timestamps = false;
 
     protected $table = 'news_category';
+
+    protected $fillable = [
+        'title',
+        'description'
+    ];
 
     // Получает категории из файла
     public static function getCategories(): array
