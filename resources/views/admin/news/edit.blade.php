@@ -12,7 +12,7 @@
 
         @include('admin/news/_form', [
             'model' => $news,
-            'formLink' => route('admin.news.update'),
+            'formLink' => route('admin.news.update', $news),
             'place' => \App\Components\Enums\ApplicationEnum::TYPE_BACKEND
         ])
 
