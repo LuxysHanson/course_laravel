@@ -1,19 +1,18 @@
 @extends('layouts/admin')
 
 @section('title')
-    @parent {{ __('Редактирование новости') }}
+    @parent {{ __('Редактирование категории') }}
 @endsection
 
 @section('content')
 
-    <div class="card-header">{{ __('Редактирование новости') }}</div>
+    <div class="card-header">{{ __('Редактирование категории') }}</div>
 
     <div class="card-body">
 
-        @include('admin/news/_form', [
-            'model' => $news,
-            'formLink' => route('admin.news.update'),
-            'place' => \App\Components\Enums\ApplicationEnum::TYPE_BACKEND
+        @include('admin/categories/_form', [
+            'model' => $category,
+            'formLink' => route('admin.categories.update', $category)
         ])
 
     </div>

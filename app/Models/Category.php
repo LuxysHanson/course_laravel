@@ -8,7 +8,14 @@ use Illuminate\Support\Facades\File;
 class Category extends Model
 {
 
+    public $timestamps = false;
+
     protected $table = 'news_category';
+
+    protected $fillable = [
+        'title',
+        'description'
+    ];
 
     // Получает категории из файла
     public static function getCategories(): array

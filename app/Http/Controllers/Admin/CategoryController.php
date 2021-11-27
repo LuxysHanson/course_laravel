@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Components\Enums\ApplicationEnum;
 use App\Http\Controllers\Controller;
-use App\Models\News;
+use App\Interfaces\CategoryRepositoryInterface;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -12,59 +12,52 @@ class CategoryController extends Controller
 
     protected $prefix_view = 'admin.categories';
 
+    /** @var CategoryRepositoryInterface $repository */
+    private $repository;
+
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    {
+        $this->repository = $categoryRepository;
+    }
 
     public function index()
     {
-        $news = News::query()->filter()->orderBy('created_at', 'DESC')->paginate(15);
+        $categories = Category::query()->paginate(15);
 
-        return $this->render('index')->with('categories', $news);
+        return $this->render('index')->with('categories', $categories);
     }
 
     public function create()
     {
-
-        return $this->render('create', [
-            'categories' => $this->repository->getCategoryList()
-        ]);
+        return $this->render('create');
     }
 
-    public function edit(News $news)
+    public function edit(Category $category)
     {
-
-        return $this->render('edit', [
-            'news' => $news,
-            'categories' => $this->repository->getCategoryList()
-        ]);
+        return $this->render('edit')->with('category', $category);
     }
 
-    public function show(News $news)
+    public function show(Category $category)
     {
-
-        return $this->render('show', [
-            'news' => $news
-        ]);
+        return $this->render('show')->with('category', $category);
     }
 
-    public function destroy(News $news)
+    public function destroy(Category $category)
     {
-        $news->delete();
-        return redirect()->route('admin.news.index')->with('message', 'Новость успешно удалено!');
+        $category->delete();
+        return redirect()->route('admin.categories.index')->with('message', 'Категория успешно удалено!');
     }
 
-    public function update(Request $request, News $news)
+    public function update(Request $request, Category $category)
     {
-        $this->repository->dataStorage($request, $news);
-        return redirect()->route('admin.news.index')->with('message', 'Новость успешно изменено!');
+        $this->repository->dataStorage($request, $category);
+        return redirect()->route('admin.categories.index')->with('message', 'Категория успешно изменено!');
     }
 
-    public function store(Request $request, News $news)
+    public function store(Request $request, Category $category)
     {
-        $this->repository->dataStorage($request, $news);
-
-        if ($request->get('place') === ApplicationEnum::TYPE_FRONTEND) {
-            return redirect()->route('news.index');
-        }
-        return redirect()->route('admin.news.index')->with('message', 'Новость успешно добавлено!');
+        $this->repository->dataStorage($request, $category);
+        return redirect()->route('admin.categories.index')->with('message', 'Категория успешно добавлена!');
     }
 
     public function export(Request $request)
