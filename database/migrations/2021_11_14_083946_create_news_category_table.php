@@ -16,7 +16,7 @@ class CreateNewsCategoryTable extends Migration
         Schema::create('news_category', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->text('description')->nullable();
         });
     }

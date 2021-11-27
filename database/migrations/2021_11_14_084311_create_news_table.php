@@ -17,14 +17,17 @@ class CreateNewsTable extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->text('description');
             $table->string('image')->nullable();
             $table->bigInteger('category_id');
             $table->boolean('is_moderate')->default(false);
             $table->timestamp('created_at')->nullable();
 
-            $table->foreign('category_id')->references('id')->on('news_category');
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('news_category')
+                ->onDelete('cascade');
         });
     }
 

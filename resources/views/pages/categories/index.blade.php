@@ -28,6 +28,8 @@
                 </div>
             @endforelse
 
+            {{ $categories->links() }}
+
         </div>
     </div>
 @endsection

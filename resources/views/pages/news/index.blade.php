@@ -23,6 +23,8 @@
 
             @if(!empty($news))
                 @include('pages/news/template/_list', $news)
+
+                {{ $news->links() }}
             @else
                 <div class="alert alert-warning" role="alert">
                     Нет добавленных новостей

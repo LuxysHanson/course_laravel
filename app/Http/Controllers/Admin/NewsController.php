@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Components\Enums\NewsExportType;
+use App\Components\Enums\ApplicationEnum;
+use App\Components\Enums\News\ExportTypeEnum;
+use App\Components\Helpers\ImageHelper;
 use App\Exports\NewsExport;
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
+use App\Models\Category;
+use App\Models\News;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -19,59 +20,76 @@ class NewsController extends Controller
 
     public function index()
     {
-        return $this->render('index');
+        $news = News::query()->filter()->orderBy('created_at', 'DESC')->paginate(15);
+
+        return $this->render('index')->with('news', $news);
     }
 
     public function create()
     {
-        $categories = DB::table('news_category')->pluck('title', 'id')->all();
+        $categories = Category::query()->pluck('title', 'id')->all();
 
         return $this->render('create', [
             'categories' => $categories
         ]);
     }
 
-    public function add(Request $request)
+    public function edit(News $news)
     {
-        if ($request->isMethod('post')) {
-            $formData = $request->only([
-                'title',
-                'category_id',
-                'description',
-                'is_moderate'
-            ]);
+        $categories = Category::query()->pluck('title', 'id')->all();
 
-            $image_url = '';
-            if ($image = $request->file('image')) {
-                $path = Storage::disk('uploads')->putFile('images/news', $image);
-                $image_url = Storage::disk('uploads')->url($path);
-            }
+        return $this->render('edit', [
+            'news' => $news,
+            'categories' => $categories
+        ]);
+    }
 
-            $formData['slug'] = Str::slug($formData['title']);
-            $formData['image'] = $image_url;
-            $formData['created_at'] = Carbon::now()->format('Y-m-d H:i:s');
-            $formData['category_id'] = (int)$formData['category_id'];
-            $formData['is_moderate'] = (int)$formData['is_moderate'];
+    public function show(News $news)
+    {
 
-            DB::table('news')->insert($formData);
+        return $this->render('show', [
+            'news' => $news
+        ]);
+    }
 
-            if ($request->get('place') == 'frontend') {
-                return redirect()->route('news.index');
-            }
-            return redirect()->route('admin.news.index')->with('message', 'Новость успешно добавлено!');
+    public function destroy(News $news)
+    {
+        $news->delete();
+        return redirect()->route('admin.news.index')->with('message', 'Новость успешно удалено!');
+    }
+
+    public function update(Request $request, News $news)
+    {
+        $news->fill($request->all());
+        $news->slug = Str::slug($news->title);
+        $news->image = ImageHelper::getImageUrlToSaving($request->file('image'));
+        $news->save();
+
+        return redirect()->route('admin.news.index')->with('message', 'Новость успешно изменено!');
+    }
+
+    public function store(Request $request, News $news)
+    {
+        $news->fill($request->all());
+        $news->slug = Str::slug($news->title);
+        $news->image = ImageHelper::getImageUrlToSaving($request->file('image'));
+        $news->save();
+
+        if ($request->get('place') === ApplicationEnum::TYPE_FRONTEND) {
+            return redirect()->route('news.index');
         }
-        return '';
+        return redirect()->route('admin.news.index')->with('message', 'Новость успешно добавлено!');
     }
 
     public function export(Request $request)
     {
         $fileName = 'news_list_'. date('Y-m-d_H_i');
 
-        if ((int)$request->get('type') != NewsExportType::TYPE_JSON) {
+        if ((int)$request->get('type') != ExportTypeEnum::TYPE_JSON) {
             return Excel::download(new NewsExport,  $fileName. '.xlsx');
         }
 
-        $allNews = DB::table('news')->get()->all();
+        $allNews = News::query()->get()->all();
         return response()->json($allNews)
             ->header('Content-Disposition', 'attachment; filename = '. $fileName .'.txt')
             ->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);

@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class NewsCategoryTableSeeder extends Seeder
@@ -17,7 +17,7 @@ class NewsCategoryTableSeeder extends Seeder
     public function run()
     {
         $newsCategoryData = $this->getData();
-        DB::table('news_category')->insert($newsCategoryData);
+        Category::query()->insert($newsCategoryData);
     }
 
     private function getData(): array
