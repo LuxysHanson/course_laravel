@@ -92,7 +92,7 @@
                                 <a href="{{ route('about') }}" class="nav-link text-left">О нас</a>
                             </li>
 
-                            @if(!Auth::guest() && Auth::user()->role == \App\Components\Enums\UsersRoleEnum::ROLE_ADMIN)
+                            @if(!Auth::guest() && Auth::user()->role == \App\Components\Enums\UsersRoleEnum::ROLE_SUPER)
                                 <li class="{{ request()->routeIs('admin.index') ? 'active' : '' }}">
                                     <a href="{{ route('admin.index') }}" class="nav-link text-left">Админка</a>
                                 </li>

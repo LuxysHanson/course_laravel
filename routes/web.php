@@ -29,7 +29,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/about', 'pages.about')->name('about');
 
 // Профиль пользователя
-Route::match(['get', 'put'], '/profile', [ProfileController::class, 'index'])->name('profile')->middleware('auth');
+Route::get( '/profile', [ProfileController::class, 'index'])->name('profile')->middleware('auth');
+Route::put( '/profile/{user}', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 
 // Страница - новостей и категории новостей
 Route::name('news.')

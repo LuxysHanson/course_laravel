@@ -18,7 +18,7 @@ class CheckIsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        $isUser = !Auth::guest() && Auth::user()->role != UsersRoleEnum::ROLE_ADMIN;
+        $isUser = !Auth::guest() && Auth::user()->role != UsersRoleEnum::ROLE_SUPER;
         return $isUser ? redirect()->route('home') : $next($request);
     }
 }

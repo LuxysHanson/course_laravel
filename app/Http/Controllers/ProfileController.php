@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UsersRequest;
+use App\Http\Requests\ProfileRequest;
 use App\Interfaces\UserRepositoryInterface;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
@@ -19,13 +20,15 @@ class ProfileController extends Controller
         $this->repository = $userRepository;
     }
 
-    public function index(UsersRequest $request)
+    public function index()
     {
-        $user = Auth::user();
-        if ($request->isMethod('put')) {
-            $this->repository->dataStorage($request, $user);
-        }
-
-        return $this->render('index')->with('user', $user);
+        return $this->render('index')->with('user', Auth::user());
     }
+
+    public function update(ProfileRequest $request, User $user)
+    {
+        $this->repository->profileChange($request, $user);
+        return redirect()->route('profile');
+    }
+
 }

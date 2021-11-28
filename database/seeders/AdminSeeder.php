@@ -25,7 +25,7 @@ class AdminSeeder extends Seeder
             'updated_at' => now(),
             'password' => Hash::make('123'),
             'remember_token' => Str::random(10),
-            'role' => UsersRoleEnum::ROLE_ADMIN
+            'role' => UsersRoleEnum::ROLE_SUPER
         ]);
     }
 }

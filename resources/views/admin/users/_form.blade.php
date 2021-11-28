@@ -52,7 +52,7 @@
 
     </div>
 
-    {{ Form::input('hidden', 'password', $model->role == \App\Components\Enums\UsersRoleEnum::ROLE_ADMIN
+    {{ Form::input('hidden', 'password', $model->role == \App\Components\Enums\UsersRoleEnum::ROLE_SUPER
                 ? '123' : \Illuminate\Support\Facades\Hash::make($model->email))  }}
 
     <div class="d-flex justify-content-end">

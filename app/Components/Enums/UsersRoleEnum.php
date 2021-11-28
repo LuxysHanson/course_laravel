@@ -8,6 +8,7 @@ final class UsersRoleEnum  extends Enum
 {
     const ROLE_USER = 'user';
     const ROLE_ADMIN = 'admin';
+    const ROLE_SUPER = 'root_admin';
 
     public static function labels()
     {
