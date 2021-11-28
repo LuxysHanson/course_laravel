@@ -67,14 +67,7 @@
 
     </div>
 
-    @php
-        use App\Components\Enums\ApplicationEnum;
-
-        /** @var integer $place */
-        $isModerate = (int)($place === ApplicationEnum::TYPE_FRONTEND)
-    @endphp
-
-    {{ Form::input('hidden', 'is_moderate', $model->is_moderate ?? $isModerate) }}
+    {{ Form::input('hidden', 'is_moderate', $model->is_moderate ?? false) }}
 
     <div class="d-flex justify-content-end">
         {{ Form::submit(__('Сохранить'), [ 'class' => "btn btn-outline-primary" ]) }}

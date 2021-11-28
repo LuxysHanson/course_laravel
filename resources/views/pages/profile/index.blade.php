@@ -1,7 +1,7 @@
 @extends('layouts/app')
 
 @section('title')
-    @parent Профиль пользователя
+    @parent {{ __('Профиль пользователя') }}
 @endsection
 
 @section('content')

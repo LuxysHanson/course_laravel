@@ -21,6 +21,8 @@ class AdminSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@admin.ru',
             'email_verified_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
             'password' => Hash::make('123'),
             'remember_token' => Str::random(10),
             'role' => UsersRoleEnum::ROLE_ADMIN

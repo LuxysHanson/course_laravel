@@ -29,14 +29,15 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/about', 'pages.about')->name('about');
 
 // Профиль пользователя
-Route::match(['get', 'put'], '/profile', [ProfileController::class, 'index'])->name('profile');
+Route::match(['get', 'put'], '/profile', [ProfileController::class, 'index'])->name('profile')->middleware('auth');
 
 // Страница - новостей и категории новостей
 Route::name('news.')
     ->prefix('news')
     ->group(function () {
         Route::get('/', [NewsController::class, 'index'])->name('index');
-        Route::get( '/add', [NewsController::class, 'add'])->name('add');
+        Route::get('/add', [NewsController::class, 'add'])->name('add');
+        Route::post('/create', [NewsController::class, 'create'])->name('create');
         Route::get('/view/{id}', [NewsController::class, 'view'])->name('view');
         Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
         Route::get('/categories/{id}', [CategoryController::class, 'view'])->name('category');
