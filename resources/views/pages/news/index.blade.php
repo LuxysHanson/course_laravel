@@ -28,7 +28,7 @@
             @if(!empty($news))
                 @include('pages/news/template/_list', $news)
 
-                {{ $news->links() }}
+                {{ $news->links('layouts/pagination') }}
             @else
                 <div class="alert alert-warning" role="alert">
                     Нет добавленных новостей
