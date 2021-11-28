@@ -72,6 +72,22 @@
                                 </ul>
                             </div>
                         </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fa fa-list"></i>
+                                <span>Категории</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="{{ route('admin.categories.create') }}">Создать категорию</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('admin.categories.index') }}">Все категории</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
 {{--                        <li class="header-menu">--}}
 {{--                            <span>Extra</span>--}}
 {{--                        </li>--}}

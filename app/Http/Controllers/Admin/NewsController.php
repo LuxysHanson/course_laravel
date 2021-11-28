@@ -3,20 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Components\Enums\ApplicationEnum;
-use App\Components\Enums\News\ExportTypeEnum;
-use App\Components\Helpers\ImageHelper;
-use App\Exports\NewsExport;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Http\Requests\NewsRequest;
+use App\Interfaces\NewsRepositoryInterface;
 use App\Models\News;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Maatwebsite\Excel\Facades\Excel;
 
 class NewsController extends Controller
 {
 
     protected $prefix_view = 'admin.news';
+
+    /** @var NewsRepositoryInterface $repository */
+    private $repository;
+
+    public function __construct(NewsRepositoryInterface $newsRepository)
+    {
+        $this->repository = $newsRepository;
+    }
 
     public function index()
     {
@@ -27,20 +31,18 @@ class NewsController extends Controller
 
     public function create()
     {
-        $categories = Category::query()->pluck('title', 'id')->all();
 
         return $this->render('create', [
-            'categories' => $categories
+            'categories' => $this->repository->getCategoryList()
         ]);
     }
 
     public function edit(News $news)
     {
-        $categories = Category::query()->pluck('title', 'id')->all();
 
         return $this->render('edit', [
             'news' => $news,
-            'categories' => $categories
+            'categories' => $this->repository->getCategoryList()
         ]);
     }
 
@@ -58,22 +60,15 @@ class NewsController extends Controller
         return redirect()->route('admin.news.index')->with('message', 'Новость успешно удалено!');
     }
 
-    public function update(Request $request, News $news)
+    public function update(NewsRequest $request, News $news)
     {
-        $news->fill($request->all());
-        $news->slug = Str::slug($news->title);
-        $news->image = ImageHelper::getImageUrlToSaving($request->file('image'));
-        $news->save();
-
+        $this->repository->dataStorage($request, $news);
         return redirect()->route('admin.news.index')->with('message', 'Новость успешно изменено!');
     }
 
-    public function store(Request $request, News $news)
+    public function store(NewsRequest $request, News $news)
     {
-        $news->fill($request->all());
-        $news->slug = Str::slug($news->title);
-        $news->image = ImageHelper::getImageUrlToSaving($request->file('image'));
-        $news->save();
+        $this->repository->dataStorage($request, $news);
 
         if ($request->get('place') === ApplicationEnum::TYPE_FRONTEND) {
             return redirect()->route('news.index');
@@ -83,16 +78,7 @@ class NewsController extends Controller
 
     public function export(Request $request)
     {
-        $fileName = 'news_list_'. date('Y-m-d_H_i');
-
-        if ((int)$request->get('type') != ExportTypeEnum::TYPE_JSON) {
-            return Excel::download(new NewsExport,  $fileName. '.xlsx');
-        }
-
-        $allNews = News::query()->get()->all();
-        return response()->json($allNews)
-            ->header('Content-Disposition', 'attachment; filename = '. $fileName .'.txt')
-            ->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+       return $this->repository->dataExport((int)$request->get('type'));
     }
 
 }
