@@ -56,6 +56,12 @@
                                 <span>Пользователи</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('admin.parser.index') }}">
+                                <i class="fa fa-paper-plane-o"></i>
+                                <span>Парсинг новостей</span>
+                            </a>
+                        </li>
                         <li class="header-menu">
                             <span>Основные</span>
                         </li>

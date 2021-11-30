@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\IndexController;
+use App\Http\Controllers\Admin\ParserController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
@@ -57,6 +58,10 @@ Route::name('admin.')
         // Пользователи
         Route::get('/users/export', [UsersController::class, 'export'])->name('users.export');
         Route::resource('/users', UsersController::class);
+
+        // Парсинг новостей
+        Route::get('/parser', [ParserController::class, 'index'])->name('parser.index');
+        Route::post('/parser/news', [ParserController::class, 'news'])->name('parser.news');
 
         // Новости
         Route::get('/news/export', [AdminNewsController::class, 'export'])->name('news.export');
