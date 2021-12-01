@@ -4,6 +4,6 @@ namespace App\Interfaces;
 
 interface ParserRepositoryInterface
 {
-    public function parsingNews(NewsParserInterface $parser, int $limit = 10);
+    public function parsingNews(NewsParserInterface $parser, int $limit = 10): bool;
 
 }

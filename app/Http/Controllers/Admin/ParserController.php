@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Components\Enums\NewsParserEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ParserNewsRequest;
 use App\Interfaces\ParserRepositoryInterface;
-use Illuminate\Http\Request;
 
 class ParserController extends Controller
 {
@@ -25,17 +25,17 @@ class ParserController extends Controller
         return $this->render('parser');
     }
 
-    public function parse(Request $request)
+    public function news(ParserNewsRequest $request)
     {
-        $class = NewsParserEnum::getClassByParse((int)$request->get('source'));
-        if (empty($class)) {
-            $messages = [
-                'error' => 'Не найден класс для парсинга данного типа!'
-            ];
-        }
-        $this->repository->parsingNews(new $class(), $request->get('limit'));
+        $request->validated();
 
-        $messages = array('success' => 'Операция прошла успешно!');
+        $class = NewsParserEnum::getClassByParse((int)$request->get('source'));
+        $isParsingSuccess = $this->repository->parsingNews(new $class(), $request->get('limit'));
+
+        $messages = $isParsingSuccess
+                    ? array('message' => 'Операция прошла успешно!')
+                    : array('warning' => 'Произошла ошибка при парсиинге нововстей');
+
         return redirect()->route('admin.parser.index')->with($messages);
     }
 
