@@ -28,7 +28,23 @@ class SocialController extends Controller
     public function responseVK()
     {
         $socialUser = Socialite::driver('vkontakte')->user();
-        $user = $this->repository->getUserBySocialNetwork($socialUser, 'vk');
+        $user = $this->repository->getUserBySocialNetwork($socialUser, 'vkontakte');
+        Auth::login($user);
+
+        return redirect()->route('home');
+    }
+
+    public function loginGithub()
+    {
+        return Auth::check()
+            ? redirect()->route('home')
+            : Socialite::driver('github')->redirect();
+    }
+
+    public function responseGithub()
+    {
+        $socialUser = Socialite::driver('github')->user();
+        $user = $this->repository->getUserBySocialNetwork($socialUser, 'github');
         Auth::login($user);
 
         return redirect()->route('home');

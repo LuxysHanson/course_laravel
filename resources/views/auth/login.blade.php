@@ -58,8 +58,7 @@
                                     <div class="col-md-6 offset-md-4 mt-3">
                                         <div class="text-center social-btn btn-group align-items-baseline" style="width: 100%;justify-content: center;">
                                             <a href="{{ route('vkLogin') }}" class="btn-primary mr-2" style="width: 24px"><i class="fa fa-vk"></i></a>
-                                            <a href="#" class="btn-info mr-2" style="width: 24px"><i class="fa fa-twitter"></i></a>
-                                            <a href="#" class="btn-danger" style="width: 24px"><i class="fa fa-google"></i></a>
+                                            <a href="{{ route('githubLogin') }}" class="btn-dark mr-2" style="width: 24px"><i class="fa fa-github"></i></a>
                                         </div>
                                     </div>
                                 </div>

@@ -74,8 +74,17 @@ Route::name('admin.')
     });
 
 // Авторизация через социальные сети
-Route::get('/auth/vk', [SocialController::class, 'loginVK'])->name('vkLogin');
-Route::get('/auth/vk/response', [SocialController::class, 'responseVK'])->name('vkResponse')->middleware('guest');
+Route::prefix('/auth')
+    ->group(function () {
+
+        // Github
+        Route::get('/github', [SocialController::class, 'loginGithub'])->name('githubLogin');
+        Route::get('/github/response', [SocialController::class, 'responseGithub'])->name('githubResponse')->middleware('guest');
+
+        // Вконтакте
+        Route::get('/vk', [SocialController::class, 'loginVK'])->name('vkLogin');
+        Route::get('/vk/response', [SocialController::class, 'responseVK'])->name('vkResponse')->middleware('guest');
+    });
 
 // Авторизация пользователей
 Auth::routes();

@@ -44,7 +44,7 @@ class SocialRepository implements SocialRepositoryInterface
         $user = new User();
         $userEmail = $socialUser->getEmail() ?: ($socialUser->getNickname() ?? '');
         $user->fill([
-            'name' => $socialUser->getName() ?? '',
+            'name' => $socialUser->getName() ?: $socialUser->getNickname(),
             'email' => $userEmail,
             'password' => Hash::make($userEmail),
             'email_verified_at' => now(),

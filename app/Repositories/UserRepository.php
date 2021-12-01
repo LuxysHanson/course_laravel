@@ -43,7 +43,7 @@ class UserRepository implements UserRepositoryInterface
             ->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
-    public function getUserByCondition(array $condition): Model
+    public function getUserByCondition(array $condition): ?Model
     {
         return User::query()->where($condition)->first();
     }
