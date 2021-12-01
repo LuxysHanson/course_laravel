@@ -27,11 +27,10 @@ class SocialController extends Controller
 
     public function responseVK()
     {
-        if (!Auth::check()) {
-            $socialUser = Socialite::driver('vkontakte')->user();
-            $user = $this->repository->getUserBySocialNetwork($socialUser, 'vk');
-            Auth::login($user);
-        }
+        $socialUser = Socialite::driver('vkontakte')->user();
+        $user = $this->repository->getUserBySocialNetwork($socialUser, 'vk');
+        Auth::login($user);
+
         return redirect()->route('home');
     }
 

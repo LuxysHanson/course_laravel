@@ -75,7 +75,7 @@ Route::name('admin.')
 
 // Авторизация через социальные сети
 Route::get('/auth/vk', [SocialController::class, 'loginVK'])->name('vkLogin');
-Route::get('/auth/vk/response', [SocialController::class, 'responseVK'])->name('vkResponse');
+Route::get('/auth/vk/response', [SocialController::class, 'responseVK'])->name('vkResponse')->middleware('guest');
 
 // Авторизация пользователей
 Auth::routes();
