@@ -34,7 +34,7 @@ class SocialRepository implements SocialRepositoryInterface
         $authSocial = AuthSocial::query()->where([
             'social_id' => $socialUser->getId(),
             'type' => $socialType
-        ])->with(['user'])->first();
+        ])->with('user')->first();
 
         if ($authSocial)
             return $authSocial->user;

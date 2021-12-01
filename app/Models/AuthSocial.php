@@ -25,7 +25,7 @@ class AuthSocial extends Model
         $this->created_at = Carbon::now()->format('Y-m-d H:i:s');
     }
 
-   public function getUser()
+   public function user()
    {
        return $this->belongsTo(User::class);
    }
