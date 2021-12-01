@@ -37,7 +37,7 @@
                 @forelse($categories as $item)
                     <div class="news-item mb-2">
                         <a class="list-group-item list-group-item-action flex-column align-items-start"
-                           href="{{ route('admin.news.show', $item) }}">
+                           href="{{ route('admin.categories.show', $item) }}">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">{{ $item->title }}</h5>
                             </div>

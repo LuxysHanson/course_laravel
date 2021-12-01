@@ -45,4 +45,9 @@ class NewsRepository implements NewsRepositoryInterface
             ->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
+    public function getNewsList(): array
+    {
+        return News::query()->get()->all();
+    }
+
 }

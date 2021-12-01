@@ -28,7 +28,7 @@
                 </div>
             @endforelse
 
-            {{ $categories->links() }}
+            {{ $categories->links('layouts/pagination') }}
 
         </div>
     </div>
