@@ -8,6 +8,7 @@ use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\UsersRequest;
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -40,6 +41,11 @@ class UserRepository implements UserRepositoryInterface
         return response()->json($allNews)
             ->header('Content-Disposition', 'attachment; filename = '. $fileName .'.txt')
             ->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    }
+
+    public function getUserByCondition(array $condition): Model
+    {
+        return User::query()->where($condition)->first();
     }
 
 }

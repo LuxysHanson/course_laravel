@@ -15,9 +15,9 @@
                                            class="col-md-4 col-form-label text-md-right">{{ __('Электронная почта') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="email" type="email"
+                                        <input id="email" type="text"
                                                class="form-control @error('email') is-invalid @enderror" name="email"
-                                               value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                               value="{{ old('email') }}" autofocus>
 
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -53,6 +53,13 @@
                                             <label class="form-check-label" for="remember">
                                                 {{ __('Запомнить меня') }}
                                             </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 offset-md-4 mt-3">
+                                        <div class="text-center social-btn btn-group align-items-baseline" style="width: 100%;justify-content: center;">
+                                            <a href="{{ route('vkLogin') }}" class="btn-primary mr-2" style="width: 24px"><i class="fa fa-vk"></i></a>
+                                            <a href="#" class="btn-info mr-2" style="width: 24px"><i class="fa fa-twitter"></i></a>
+                                            <a href="#" class="btn-danger" style="width: 24px"><i class="fa fa-google"></i></a>
                                         </div>
                                     </div>
                                 </div>

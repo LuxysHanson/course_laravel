@@ -46,6 +46,9 @@
                         @endif
                     @else
                         <div class="dropdown">
+                            @if(Auth::user()->avatar)
+                                <img src="{{ Auth::user()->avatar }}" width="40" height="40" class="rounded-circle" style="margin-right: 8px">
+                            @endif
                             <a href="javascript:void(0)" class="drop-btn more">{{ Auth::user()->name }}</a>
                             <div class="dropdown-content">
                                 <a class="dropdown-item" href="{{ route('profile') }}">

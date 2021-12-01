@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\ParserController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsController;
@@ -72,6 +73,9 @@ Route::name('admin.')
         Route::resource('/categories', AdminCategoryController::class);
     });
 
+// Авторизация через социальные сети
+Route::get('/auth/vk', [SocialController::class, 'loginVK'])->name('vkLogin');
+Route::get('/auth/vk/response', [SocialController::class, 'responseVK'])->name('vkResponse');
 
 // Авторизация пользователей
 Auth::routes();
