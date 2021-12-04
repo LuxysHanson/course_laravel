@@ -27,9 +27,9 @@
     </div>
 
     <div class="form-group">
-        {{ Form::label('category_description', 'Описание категории') }}
+        {{ Form::label('ck-editor', 'Описание категории') }}
         {{ Form::textarea('description', $model->description ?? null, [
-            'id' => 'category_description',
+            'id' => 'ck-editor',
             'class' => 'form-control',
             'placeholder' => 'Введите текст',
             'rows' => 5

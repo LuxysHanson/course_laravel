@@ -40,9 +40,9 @@
     </div>
 
     <div class="form-group">
-        {{ Form::label('news_description', 'Текст новости') }}
+        {{ Form::label('ck-editor', 'Текст новости') }}
         {{ Form::textarea('description', $model->description ?? null, [
-            'id' => 'news_description',
+            'id' => 'ck-editor',
             'class' => 'form-control',
             'placeholder' => 'Введите текст',
             'rows' => 5
