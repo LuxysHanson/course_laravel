@@ -23,9 +23,10 @@ class SocialRepository implements SocialRepositoryInterface
 
     public function getUserBySocialNetwork(UserOAuth2 $socialUser, string $socialType)
     {
-        if ($email = $socialUser->getEmail()) {
+        $userEmail = $socialUser->getEmail() ?: ($socialUser->getNickname() ?? '');
+        if ($userEmail) {
             $user = $this->userRepository->getUserByCondition([
-                'email' => $email
+                'email' => $userEmail
             ]);
 
             if ($user) return $user;
@@ -42,7 +43,6 @@ class SocialRepository implements SocialRepositoryInterface
         DB::beginTransaction();
 
         $user = new User();
-        $userEmail = $socialUser->getEmail() ?: ($socialUser->getNickname() ?? '');
         $user->fill([
             'name' => $socialUser->getName() ?: $socialUser->getNickname(),
             'email' => $userEmail,

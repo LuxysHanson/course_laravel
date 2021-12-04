@@ -1,17 +1,17 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\IndexController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\ParserController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Auth\SocialController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
-use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,14 +76,8 @@ Route::name('admin.')
 // Авторизация через социальные сети
 Route::prefix('/auth')
     ->group(function () {
-
-        // Github
-        Route::get('/github', [SocialController::class, 'loginGithub'])->name('githubLogin');
-        Route::get('/github/response', [SocialController::class, 'responseGithub'])->name('githubResponse')->middleware('guest');
-
-        // Вконтакте
-        Route::get('/vk', [SocialController::class, 'loginVK'])->name('vkLogin');
-        Route::get('/vk/response', [SocialController::class, 'responseVK'])->name('vkResponse')->middleware('guest');
+        Route::get('/{type}', [SocialController::class, 'login'])->name('socialLogin');
+        Route::get('/{type}/response', [SocialController::class, 'response'])->name('socialResponse')->middleware('guest');
     });
 
 // Авторизация пользователей

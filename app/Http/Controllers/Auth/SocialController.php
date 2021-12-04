@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Components\Enums\SocialTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Interfaces\SocialRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
@@ -18,33 +19,19 @@ class SocialController extends Controller
         $this->repository = $socialRepository;
     }
 
-    public function loginVK()
+    public function login(string $driver)
     {
+        $social_type = SocialTypeEnum::labels()[$driver] ?? '';
         return Auth::check()
             ? redirect()->route('home')
-            : Socialite::driver('vkontakte')->redirect();
+            : Socialite::driver($social_type)->redirect();
     }
 
-    public function responseVK()
+    public function response(string $driver)
     {
-        $socialUser = Socialite::driver('vkontakte')->user();
-        $user = $this->repository->getUserBySocialNetwork($socialUser, 'vkontakte');
-        Auth::login($user);
-
-        return redirect()->route('home');
-    }
-
-    public function loginGithub()
-    {
-        return Auth::check()
-            ? redirect()->route('home')
-            : Socialite::driver('github')->redirect();
-    }
-
-    public function responseGithub()
-    {
-        $socialUser = Socialite::driver('github')->user();
-        $user = $this->repository->getUserBySocialNetwork($socialUser, 'github');
+        $social_type = SocialTypeEnum::labels()[$driver] ?? '';
+        $socialUser = Socialite::driver($social_type)->user();
+        $user = $this->repository->getUserBySocialNetwork($socialUser, $social_type);
         Auth::login($user);
 
         return redirect()->route('home');
