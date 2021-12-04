@@ -40,10 +40,7 @@
                              alt="User picture">
                     </div>
                     <div class="user-info">
-          <span class="user-name">Jhon
-            <strong>Smith</strong>
-          </span>
-                        <span class="user-role">Administrator</span>
+                        <span class="user-name">{{ \Illuminate\Support\Facades\Auth::user()->name }}</span>
                         <span class="user-status">
             <i class="fa fa-circle"></i>
             <span>Online</span>
@@ -53,6 +50,18 @@
                 <!-- sidebar-search  -->
                 <div class="sidebar-menu">
                     <ul>
+                        <li>
+                            <a href="{{ route('admin.users.index') }}">
+                                <i class="fa fa-user-o"></i>
+                                <span>Пользователи</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.parser.index') }}">
+                                <i class="fa fa-paper-plane-o"></i>
+                                <span>Парсинг новостей</span>
+                            </a>
+                        </li>
                         <li class="header-menu">
                             <span>Основные</span>
                         </li>
@@ -88,20 +97,11 @@
                                 </ul>
                             </div>
                         </li>
-{{--                        <li class="header-menu">--}}
-{{--                            <span>Extra</span>--}}
-{{--                        </li>--}}
 {{--                        <li>--}}
 {{--                            <a href="#">--}}
 {{--                                <i class="fa fa-book"></i>--}}
 {{--                                <span>Documentation</span>--}}
 {{--                                <span class="badge badge-pill badge-primary">Beta</span>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#">--}}
-{{--                                <i class="fa fa-calendar"></i>--}}
-{{--                                <span>Calendar</span>--}}
 {{--                            </a>--}}
 {{--                        </li>--}}
 {{--                        <li>--}}
@@ -162,6 +162,17 @@
         toastr.warning("{{ session('warning') }}");
     @endif
 
+</script>
+
+<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+<script>
+    var options = {
+        filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+        filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+        filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+        filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+    };
+    CKEDITOR.replace('ck-editor', options);
 </script>
 
 </body>

@@ -69,10 +69,6 @@ class NewsController extends Controller
     public function store(NewsRequest $request, News $news)
     {
         $this->repository->dataStorage($request, $news);
-
-        if ($request->get('place') === ApplicationEnum::TYPE_FRONTEND) {
-            return redirect()->route('news.index');
-        }
         return redirect()->route('admin.news.index')->with('message', 'Новость успешно добавлено!');
     }
 

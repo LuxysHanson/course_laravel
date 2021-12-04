@@ -19,7 +19,7 @@
                                 {{ $item->title }}
                             </a>
                         </h2>
-                        <p class="mb-3">{{ $item->description }}</p>
+                        <p class="mb-3">{!! $item->description !!}</p>
                     </div>
                 </div>
             @empty
@@ -28,7 +28,7 @@
                 </div>
             @endforelse
 
-            {{ $categories->links() }}
+            {{ $categories->links('layouts/pagination') }}
 
         </div>
     </div>

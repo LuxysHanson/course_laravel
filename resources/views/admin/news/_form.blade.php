@@ -40,9 +40,9 @@
     </div>
 
     <div class="form-group">
-        {{ Form::label('news_description', 'Текст новости') }}
+        {{ Form::label('ck-editor', 'Текст новости') }}
         {{ Form::textarea('description', $model->description ?? null, [
-            'id' => 'news_description',
+            'id' => 'ck-editor',
             'class' => 'form-control',
             'placeholder' => 'Введите текст',
             'rows' => 5
@@ -67,14 +67,7 @@
 
     </div>
 
-    @php
-        use App\Components\Enums\ApplicationEnum;
-
-        /** @var integer $place */
-        $isModerate = (int)($place === ApplicationEnum::TYPE_FRONTEND)
-    @endphp
-
-    {{ Form::input('hidden', 'is_moderate', $model->is_moderate ?? $isModerate) }}
+    {{ Form::input('hidden', 'is_moderate', $model->is_moderate ?? false) }}
 
     <div class="d-flex justify-content-end">
         {{ Form::submit(__('Сохранить'), [ 'class' => "btn btn-outline-primary" ]) }}

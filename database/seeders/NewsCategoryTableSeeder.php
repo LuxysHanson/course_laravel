@@ -3,9 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use Faker\Factory;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class NewsCategoryTableSeeder extends Seeder
 {
@@ -42,7 +40,7 @@ class NewsCategoryTableSeeder extends Seeder
         Category::query()->insert($newsCategoryData);
     }
 
-    private function getData(): array
+    /*private function getData(): array
     {
         $data = [];
         $faker = Factory::create('ru_RU');
@@ -57,6 +55,6 @@ class NewsCategoryTableSeeder extends Seeder
         }
 
         return $data;
-    }
+    }*/
 
 }

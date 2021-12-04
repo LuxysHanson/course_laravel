@@ -27,7 +27,7 @@
 {{--                    </div>--}}
 
                     <div class="news-content">
-                        {{ $news->description }}
+                        {!! $news->description !!}
                     </div>
 
 {{--                    <div class="pt-5">--}}

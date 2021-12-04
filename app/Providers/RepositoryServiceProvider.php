@@ -4,12 +4,27 @@ namespace App\Providers;
 
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Interfaces\NewsRepositoryInterface;
+use App\Interfaces\ParserRepositoryInterface;
+use App\Interfaces\SocialRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
 use App\Repositories\CategoryRepository;
 use App\Repositories\NewsRepository;
+use App\Repositories\ParserRepository;
+use App\Repositories\SocialRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
+
+    protected $mappers = [
+        NewsRepositoryInterface::class => NewsRepository::class,
+        CategoryRepositoryInterface::class => CategoryRepository::class,
+        UserRepositoryInterface::class => UserRepository::class,
+        ParserRepositoryInterface::class => ParserRepository::class,
+        SocialRepositoryInterface::class => SocialRepository::class
+    ];
+
     /**
      * Register services.
      *
@@ -17,8 +32,9 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(NewsRepositoryInterface::class, NewsRepository::class);
-        $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
+        foreach ($this->mappers as $abstract => $concrete) {
+            $this->app->bind($abstract, $concrete);
+        }
     }
 
     /**
