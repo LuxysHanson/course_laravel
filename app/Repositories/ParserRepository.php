@@ -21,7 +21,7 @@ class ParserRepository implements ParserRepositoryInterface
         $this->newsRepository = $newsRepository;
     }
 
-    public function parsingNews(NewsParserInterface $parser, int $limit = 10): bool
+    public function parsingNews(NewsParserInterface $parser, int $limit = 10)
     {
         $data = $parser->getParsingData($limit);
 
@@ -38,7 +38,6 @@ class ParserRepository implements ParserRepositoryInterface
 
                 if (empty($category->title) && !$category->save()) {
                     DB::rollBack();
-                    return false;
                 }
 
                 $news = $this->inThereNewsSystem($item['title'] ?? '');
@@ -47,13 +46,11 @@ class ParserRepository implements ParserRepositoryInterface
 
                 if (!$news->save()) {
                     DB::rollBack();
-                    return false;
                 }
             }
         }
 
         DB::commit();
-        return true;
     }
 
     protected function inThereNewsSystem(string $title): News
